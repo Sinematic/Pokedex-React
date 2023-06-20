@@ -1,3 +1,6 @@
 .App {
-  text-align: center;
+  width: 100%;
+  background-color: #ededed;
+  border-left: 2px solid #24282C;
+  border-right: 2px solid #24282C;
 }

@@ -1,0 +1,60 @@
+.pokemon-card {
+    width: 100%;
+    border-radius: 15px;
+    background-color: var(--main-color);
+    border: 2px solid lightgrey;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px 0px;
+}
+
+.pokemon-name {
+    text-align: center;
+}
+
+.pokemon-img {
+    width: 100%;
+}
+
+.pokemon-types {
+    text-align: center;
+    font-weight: 500;
+    padding-bottom: 8px;
+}
+
+.pokemon-types-img {
+    max-width: 25px;
+}
+
+.pokemo-duo-types:first-of-type {
+    padding-right: 12px;
+}
+
+.pokemon-stat-li {
+    font-size: 14px;
+}
+
+.pokemon-types-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0px 5px 0px;
+}
+
+.pokemon-card:hover {
+    -webkit-box-shadow: 5px 5px 15px 5px #FF8080, 
+    -9px 5px 15px 5px #FFE488, 
+    -7px -5px 15px 5px #8CFF85, 
+    12px -5px 15px 5px #80C7FF, 
+    12px 10px 15px 7px #E488FF, 
+    -10px 10px 15px 7px #FF616B, 
+    -10px -7px 27px 1px #8E5CFF, 
+    7px 7px 27px 5px rgba(133,133,133,0); 
+    box-shadow: 5px 5px 15px 5px #FF8080, 
+    -9px 5px 15px 5px #FFE488, 
+    -7px -5px 15px 5px #8CFF85, 
+    12px -5px 15px 5px #80C7FF, 
+    12px 10px 15px 7px #E488FF, 
+    -10px 10px 15px 7px #FF616B, 
+    -10px -7px 27px 1px #8E5CFF, 
+    7px 7px 27px 5px rgba(133,133,133,0);
+}

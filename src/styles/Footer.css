@@ -1,0 +1,11 @@
+footer {
+    width: 100%;
+    max-width: 1440px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 80px 0px;
+}
+
+footer a {
+    padding: 80px;
+}
