@@ -1,7 +1,7 @@
 .pokemon-card {
     width: 100%;
     border-radius: 15px;
-    background-color: var(--main-color);
+    background-color: #FAFAFA;
     border: 2px solid lightgrey;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 10px 0px;
@@ -25,17 +25,15 @@
     max-width: 25px;
 }
 
-.pokemo-duo-types:first-of-type {
-    padding-right: 12px;
-}
-
 .pokemon-stat-li {
     font-size: 14px;
 }
 
 .pokemon-types-div {
-    width: 100%;
+    margin: 0 auto;
+    width: fit-content;
     display: flex;
+    gap: 15px;
     justify-content: center;
     padding: 8px 0px 5px 0px;
 }

@@ -1,24 +1,18 @@
-:root {
-    --main-color: #FAFAFA;
-    --secondary-color: whitesmoke;
-    --alt-color: #C21757;
-    --theme-first-color: #3062a8;
-    --theme-second-color: #f0c306;
-}
-
 .btn-stats-displayed {
     display: none;
 }
 
 .filters {
-    max-width: 100%;
+    max-width: 1440px;
+    box-sizing: border-box;
     padding: 30px 40px;
-    min-height: 75px;
-    display: inline-block;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     background-color: #FAFAFA;
-    border-top: 4px solid #24282C;
-    border-bottom: 4px solid #24282C;
+    border-top: 2px solid #24282C;
+    border-bottom: 2px solid #24282C;
 }
 
 button, select, input {
@@ -28,6 +22,8 @@ button, select, input {
     font-size: 18px;
     padding: 12px 8px;
     width: auto;
+    box-sizing: border-box;
+    height: 50px;
     border-radius: 15px;
 }
 
@@ -41,8 +37,8 @@ button:hover, input:not(.search):hover {
 }
 
 button[type="submit"] {
-    padding: 12px 15px;
-    border-color: var(--alt-color);
+    padding: 12px 10px;
+    border-color: #C21757;
 }
 
 input::placeholder {
@@ -52,7 +48,7 @@ input::placeholder {
 .search {
     padding-left: 16px;
     margin-bottom: 15px;
-    border-color: var(--alt-color);
+    border-color: #C21757;
 }
 
 .search:focus {

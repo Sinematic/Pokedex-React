@@ -3,22 +3,29 @@ import "../styles/Card.css"
 function Card(props) {
 
     return (
-        <article className="pokemon-card" id={"pokemon" + props.pokemonNumber} /*style=order=pokemonNumber*/>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/pokemonNumber.png" alt={props.pokemonName} className="pokemon-img" />
-            <h3 className="pokemon-name">{props.pokemonName} {(props.pokemonNumber)}</h3>
+        <article className="pokemon-card" id={props.number} style={{ order: props.number }}>
+
+            <img src={props.image} alt={props.name} className="pokemon-img" />
+
+            <h3 className="pokemon-name">{props.name} {"(" + (
+                props.number < 10 ? "00" + props.number : (props.number < 100 ? "0" + props.number : props.number)) + ")"}</h3>
+
             <div className="pokemon-types-div">
-                <img src={props.typeURL} alt="Type du Pokémon" className="pokemon-types-img pokemo-duo-types" />
-                <img src={props.typeURL} alt="Type du Pokémon" className="pokemon-types-img pokemo-duo-types" />
+                <img src={props.type1[1]} alt="Type du Pokémon" className="pokemon-types-img" />
+                {props.type1[0] !== props.type2[0] ? <img src={props.type2[1]} alt="Type du Pokémon" className="pokemon-types-img pokemo-duo-types" /> : null}
             </div>
-            <p className="pokemon-types">{props.types}</p>
+            
+            <p className="pokemon-types">{props.type1[0]}{props.type1[0] !== props.type2[0] ? " - " + props.type2[0] : null}</p>
+
             <ol className="pokemon-stats hidden">
-                <li className="pokemon-stat-li">HP : {props.hpValue}</li>
-                <li className="pokemon-stat-li">Attaque : {props.attackValue}</li>
-                <li className="pokemon-stat-li">Défense : {props.defenseValue}</li>
-                <li className="pokemon-stat-li">Attaque spéciale : {props.specialAttackValue}</li>
-                <li className="pokemon-stat-li">Défense spéciale : {props.specialDefenseValue}</li>
-                <li className="pokemon-stat-li">Vitesse : {props.speedValue}</li>
+                <li className="pokemon-stat-li">HP : {props.hp}</li>
+                <li className="pokemon-stat-li">Attaque : {props.attack}</li>
+                <li className="pokemon-stat-li">Défense : {props.defense}</li>
+                <li className="pokemon-stat-li">Attaque spéciale : {props.specialAttack}</li>
+                <li className="pokemon-stat-li">Défense spéciale : {props.specialDefense}</li>
+                <li className="pokemon-stat-li">Vitesse : {props.speed}</li>
             </ol>
+
         </article>
     )
 }

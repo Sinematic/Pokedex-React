@@ -7,10 +7,10 @@ nav {
     height: 75px;
     width: 100%;
     box-sizing: border-box;
-    background-color: var(--theme-second-color);
+    background-color: #f0c306;
     display: flex;
     justify-content: space-between;
-    border-bottom: 4px solid var(--theme-first-color);
+    border-bottom: 4px solid #24282C;
     color: black;
 }
 
@@ -22,15 +22,14 @@ h2 {
     margin-top: -16px;    
 }
 
-
 ul {
     width: 35%;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 75px;
-    background-color: var(--main-color);
-    border-left: 4px solid var(--theme-first-color);
+    background-color: #FAFAFA;
+    border-left: 4px solid #24282C;
 }
 
 nav li {
