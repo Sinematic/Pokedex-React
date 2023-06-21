@@ -7,8 +7,8 @@ function Card(props) {
 
             <img src={props.image} alt={props.name} className="pokemon-img" />
 
-            <h3 className="pokemon-name">{props.name} {"(" + (
-                props.number < 10 ? "00" + props.number : (props.number < 100 ? "0" + props.number : props.number)) + ")"}</h3>
+            <h3 className="pokemon-name">{props.name} ({(// Je m'assure que le numéro du Pokémon soit en 3 caractères
+                props.number < 10 ? "00" + props.number : (props.number < 100 ? "0" + props.number : props.number))})</h3>
 
             <div className="pokemon-types-div">
                 <img src={props.type1[1]} alt="Type du Pokémon" className="pokemon-types-img" />

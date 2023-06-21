@@ -9,8 +9,9 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<Filters />
-			<Pokedex />
+			<Pokedex>
+				<Filters />
+			</Pokedex>
 			<Footer />
 		</div>
 	);

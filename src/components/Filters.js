@@ -22,10 +22,9 @@ function Filters() {
             <button className="btn-legendaries">Afficher les pokémons légendaires</button>
 
             <input name="search" type="search" className="search" placeholder="Rechercher un pokémon" />
-
             <button type="submit" className="submit">🔎</button>
-
-            <button className="random">Générer une équipe aléatoire</button>    
+            <button className="random">Générer une équipe aléatoire</button> 
+            <button className="balanced">Générer une équipe équilibrée aléatoire</button>
             <button className="reset">Réinitialiser les filtres</button>
         </section>
     )

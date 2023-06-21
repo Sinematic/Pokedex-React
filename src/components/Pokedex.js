@@ -32,6 +32,8 @@ function Pokedex() {
         setPokemons(pokemonList)    
     }
 
+    const [sort, setSort] = useState(null)
+
     useEffect(() => {
         getPokemons()
     }, [])

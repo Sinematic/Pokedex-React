@@ -9,7 +9,8 @@
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    column-gap: 15px;
+    row-gap: 5px;
     background-color: #FAFAFA;
     border-top: 2px solid #24282C;
     border-bottom: 2px solid #24282C;
@@ -36,9 +37,21 @@ button:hover, input:not(.search):hover {
     display: none;
 }
 
-button[type="submit"] {
+.submit {
     padding: 12px 10px;
-    border-color: #C21757;
+    border-color: #4b44a1;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 60px;
+}
+
+.submit:hover {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #FAFAFA;
+    font-size: 24px;
+    transition-duration: 400ms;
 }
 
 input::placeholder {
