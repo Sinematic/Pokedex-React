@@ -5,6 +5,7 @@
     border: 2px solid lightgrey;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 10px 0px;
+    position: relative;
 }
 
 .pokemon-name {
@@ -55,4 +56,49 @@
     -10px 10px 15px 7px #FF616B, 
     -10px -7px 27px 1px #8E5CFF, 
     7px 7px 27px 5px rgba(133,133,133,0);
+}
+
+.generation-badge {
+    position: absolute;
+    color: #FAFAFA;
+    top: -2px;
+    right: -2px;
+    padding: 10px 15px;
+    border-radius: 5px 15px 5px 15px;
+    aspect-ratio: 1 / 1;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.generation-1 {
+    background-color: #8FBC8F;
+}
+
+.generation-2 {
+    background-color: #b83737;
+}
+
+.generation-3 {
+    background-color: #DAA520;
+}
+
+.generation-4 {
+    background-color: #18c418;
+}
+
+.generation-5 {
+    background-color: #b5b521;
+}
+
+.generation-6 {
+    background-color: #FF00FF;
+}
+
+.generation-7 {
+    background-color: #FFA500;
+}
+
+.generation-8 {
+    background-color: #800080;
 }

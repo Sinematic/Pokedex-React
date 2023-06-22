@@ -2,16 +2,13 @@ import '../styles/App.css';
 import Header from './Header';
 import Pokedex from './Pokedex';
 import Footer from './Footer';
-import Filters from './Filters';
 
 function App() {
 
 	return (
 		<div className="App">
 			<Header />
-			<Pokedex>
-				<Filters />
-			</Pokedex>
+			<Pokedex />
 			<Footer />
 		</div>
 	);
