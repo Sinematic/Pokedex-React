@@ -1,21 +1,23 @@
-import { useState } from "react"
 import "../styles/Filters.css"
 
-function Filters() {
+function Filters(props) {
 
-    const [sort, setSort] = useState(null)
+    const {sort, setSort} = props
+    const {sortByGeneration, setSortByGeneration} = props
+    const {stats, displayStats} = props
+    const {retro, displayRetro} = props
 
-    const handleSelectValue = (event) => {
-        const value = event.target.value
-        setSort(value)
+    const resetFilters = () => {
+        setSort(null)
+        setSortByGeneration(null)
+        displayStats(false)
+        displayRetro(false)
     }
-
-    const [displayedStats, setDisplayedStats] = useState(false)
 
     return (
         <section className="filters">
             
-            <select value={sort} onChange={handleSelectValue}>
+            <select onChange={(event) => setSortByGeneration(event.target.value)}>
                 <option value="null">Afficher toutes les générations</option>
                 <option value="1">Afficher la première génération</option>
                 <option value="2">Afficher la deuxième génération</option>
@@ -27,16 +29,19 @@ function Filters() {
                 <option value="8">Afficher la huitième génération</option>
             </select>
 
-            {displayedStats ? <button onClick={() => setDisplayedStats(false)} className="btn-stats-displayed">Cacher les statistiques</button> : null}
-            {!displayedStats ? <button onClick={() => setDisplayedStats(true)} className="btn-stats-hidden">Afficher les statistiques</button> : null}
+            <button onClick={() => displayStats(!stats)} className="stats">{stats ? "Cacher les statistiques" : "Afficher les statistiques"}</button>
 
             <button onClick={() => setSort("legendaries")} className="btn-legendaries">Afficher les pokémons légendaires</button>
 
-            <input onChange={handleSelectValue} type="search" className="search" placeholder="Rechercher un pokémon" />
+            <input onChange={(event) => setSort(event.target.value)} type="search" className="search" placeholder="Rechercher un pokémon" />
             <button className="submit">🔎</button>
+
+            <button onClick={() => displayRetro(!retro)} className="retro">{retro ? "Quitter le mode rétro 😄" : "Passer en mode Rétro 🕹️"}</button>
+
             <button onClick={() => setSort("random")} className="random">Générer une équipe aléatoire</button> 
             <button onClick={() => setSort("balanced")} className="balanced">Générer une équipe équilibrée aléatoire</button>
-            <button onClick={() => setSort(null)} className="reset">Réinitialiser les filtres</button>
+
+            <button onClick={() => resetFilters()} className="reset">Réinitialiser les filtres</button>
         </section>
     )
 }
