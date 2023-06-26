@@ -60,7 +60,7 @@ input::placeholder {
 }
 
 .search::placeholder {
-    color:#C21757
+    color:#C21757;
 }
 
 .search:focus {

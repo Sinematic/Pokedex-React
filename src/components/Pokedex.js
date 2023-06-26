@@ -1,29 +1,28 @@
 import { Fragment, useEffect, useState } from "react";
 import Card from "./Card.js"
 import Filters from "./Filters.js";
+import Error from "./Error.js";
 import "../styles/Pokedex.css"
 
 function Pokedex() {
 
+    const [message, setMessage] = useState(null)
     const [pokemons, setPokemons] = useState([])
-
     const [sort, setSort] = useState("pokemon/")
-
-    const [sortByGeneration, setSortByGeneration] = useState(null)
-
+    const [search, setSearch] = useState("")
     const [retro, displayRetro] = useState(false)
     const [stats, displayStats] = useState(false)
     
-
     const getPokemons = async () => {
 
         const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
         const data = await response.json();
+        console.log(data.length, data)
 
-    const flattened = data.flat()     
+        const flattened = Array.isArray(data) ? data.flat() : [data]
 
         const pokemonList = flattened.map((element) => ({
-    
+                
             name : element.name,
             number : element.pokedexId,
             image : element.image,
@@ -41,41 +40,43 @@ function Pokedex() {
             sprite : element.sprite
         }))
     
-        setPokemons(pokemonList)    
-    }
+        setPokemons(pokemonList)
+    
+    } 
 
     useEffect(() => {
+        setSort()
         getPokemons()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sort])
 
     return (
 
         <Fragment>
-            <Filters 
+            <Filters
                 sort={sort} 
                 setSort={setSort} 
                 stats={stats} 
                 displayStats={displayStats}
                 retro={retro} 
-                displayRetro={displayRetro} 
-                sortByGeneration={sortByGeneration}
-                setSortByGeneration={setSortByGeneration}
+                displayRetro={displayRetro}
+                search={search}
+                setSearch={setSearch}
             />
 
             <section className="pokedex">
-
-                {sortByGeneration === null ? pokemons.map((pokemon) => (
+                
+                {pokemons !== null ? pokemons.map((pokemon) => (
                     <Card key={pokemon.number}
                         {...pokemon}
                         sort={sort} 
                         setSort={setSort} 
                         stats={stats} 
                         displayStats={displayStats}
-                        retro={retro}  
-                        sortByGeneration={sortByGeneration}
-                        setSortByGeneration={setSortByGeneration}
+                        retro={retro}
+                        isVisible={false}
                     />
-                )) : null}
+                )) : <Error message={message} />}
 
             </section>
         </Fragment>
