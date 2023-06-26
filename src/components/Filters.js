@@ -8,7 +8,7 @@ function Filters(props) {
     const {retro, displayRetro} = props
 
     const resetFilters = () => {
-        setSort(null)
+        setSort("pokemon/")
         setSortByGeneration(null)
         displayStats(false)
         displayRetro(false)
@@ -38,8 +38,8 @@ function Filters(props) {
 
             <button onClick={() => displayRetro(!retro)} className="retro">{retro ? "Quitter le mode rétro 😄" : "Passer en mode Rétro 🕹️"}</button>
 
-            <button onClick={() => setSort("random")} className="random">Générer une équipe aléatoire</button> 
-            <button onClick={() => setSort("balanced")} className="balanced">Générer une équipe équilibrée aléatoire</button>
+            <button onClick={() => setSort("random/team")} className="random">Générer une équipe aléatoire</button> 
+            <button onClick={() => setSort("random/team/suggest")} className="balanced">Générer une équipe équilibrée aléatoire</button>
 
             <button onClick={() => resetFilters()} className="reset">Réinitialiser les filtres</button>
         </section>

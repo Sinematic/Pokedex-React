@@ -7,23 +7,22 @@ function Pokedex() {
 
     const [pokemons, setPokemons] = useState([])
 
-    const [sort, setSort] = useState(null)
-    const updateSort = (value) => setSort(value)
+    const [sort, setSort] = useState("pokemon/")
 
     const [sortByGeneration, setSortByGeneration] = useState(null)
 
     const [retro, displayRetro] = useState(false)
-    const updateRetro = (value) => displayRetro(value)
-
     const [stats, displayStats] = useState(false)
-    const updateDisplayStats = () => displayStats(!stats)
+    
 
     const getPokemons = async () => {
 
-        const response = await fetch("https://pokebuildapi.fr/api/v1/pokemon/");
+        const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
         const data = await response.json();
 
-        const pokemonList = data.map((element) => ({
+    const flattened = data.flat()     
+
+        const pokemonList = flattened.map((element) => ({
     
             name : element.name,
             number : element.pokedexId,
@@ -45,24 +44,9 @@ function Pokedex() {
         setPokemons(pokemonList)    
     }
 
-    const sortPokemons = (sort) => {
-
-        if(Number.isInteger(parseInt(sort))) {
-
-            setPokemons(pokemons.filter(pokemon => pokemon.generation === parseInt(sort)))
-        }
-    }
-/*
-    const sortByGeneration = () => {
-
-        return pokemonsToDisplay.filter(pokemon => pokemon.generation === parseInt(sort))
-    }
-*/
     useEffect(() => {
         getPokemons()
-        sortPokemons(sort)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [sort])
 
     return (
 
@@ -74,37 +58,22 @@ function Pokedex() {
                 displayStats={displayStats}
                 retro={retro} 
                 displayRetro={displayRetro} 
+                sortByGeneration={sortByGeneration}
+                setSortByGeneration={setSortByGeneration}
             />
-
-
-            <h2>sort = {sort}</h2>
-            <h2>retro = {retro}</h2>
 
             <section className="pokedex">
 
-                {sort === null ? pokemons.map((pokemon) => (
+                {sortByGeneration === null ? pokemons.map((pokemon) => (
                     <Card key={pokemon.number}
-                        name={pokemon.name}
-                        number={pokemon.number}
-                        image={pokemon.image}
-                        generation={pokemon.generation} 
-                        hp={pokemon.hp} 
-                        attack={pokemon.attack} 
-                        defense={pokemon.defense} 
-                        specialAttack={pokemon.specialAttack} 
-                        specialDefense={pokemon.specialDefense} 
-                        speed={pokemon.speed}
-                        type1={pokemon.type1}
-                        type2={pokemon.type2}
-                        preEvolution={pokemon.preEvolution}
-                        evolutions={pokemon.evolutions}
-                        sprite={pokemon.sprite}
+                        {...pokemon}
                         sort={sort} 
                         setSort={setSort} 
                         stats={stats} 
                         displayStats={displayStats}
-                        retro={retro} 
-                        showRetroValue={updateRetro} 
+                        retro={retro}  
+                        sortByGeneration={sortByGeneration}
+                        setSortByGeneration={setSortByGeneration}
                     />
                 )) : null}
 
