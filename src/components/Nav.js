@@ -16,7 +16,7 @@ function Nav() {
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/Sinematic/Custom-Pokedex">
+                        <a href="https://github.com/Sinematic/Pokedex-React/blob/main/README.md">
                             <img src={GitHubLogo} alt="GitHub" className="nav-logo" />
                         </a>
                     </li>

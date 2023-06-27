@@ -6,6 +6,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 10px 0px;
     position: relative;
+    border: 2px solid #8FBC8F;
 }
 
 .pokemon-card:hover {

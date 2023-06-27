@@ -7,7 +7,7 @@ function Card(props) {
         <Fragment>
             {props.isVisible &&  
             
-            <article className="pokemon-card" id={props.number} style={{ order: props.number }}>
+            <article/* onClick={() => getEvolutions(props.preEvolution, props.evolutions)} */className="pokemon-card" id={props.number} style={{ order: props.number }}>
 
                 <img loading="lazy" src={props.retro ? props.sprite : props.image} alt={props.name} className="pokemon-img" />
 

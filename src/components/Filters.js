@@ -27,23 +27,24 @@ function Filters(props) {
                 <option value="pokemon/generation/6">Afficher la sixième génération</option>
                 <option value="pokemon/generation/7">Afficher la septième génération</option>
                 <option value="pokemon/generation/8">Afficher la huitième génération</option>
-            </select>
+            </select>       
 
             <button onClick={() => displayStats(!stats)} className="stats">{stats ? "Cacher les statistiques" : "Afficher les statistiques"}</button>
-
             <button onClick={() => setSort("legendaries")} className="btn-legendaries">Afficher les pokémons légendaires</button>
-
-            <input onChange={(event) => setSearch(event.target.value)} value={props.search} type="search" className="search" placeholder="Rechercher un pokémon" />
+            <input onChange={(event) => setSearch(event.target.value)} value={search} type="search" className="search" placeholder="Rechercher un pokémon" />
             <button onClick={() => setSort(`pokemon/${search}`)} className="submit">🔎</button>
-
             <button onClick={() => displayRetro(!retro)} className="retro">{retro ? "Quitter le mode rétro 😄" : "Passer en mode Rétro 🕹️"}</button>
-
             <button onClick={() => setSort("random/team")} className="random">Générer une équipe aléatoire</button> 
-            <button onClick={() => setSort("random/team/suggest")} className="balanced">Générer une équipe équilibrée aléatoire</button>
-
+            <button onClick={() => setSort("random/team/suggest")} className="balanced">Générer une équipe équilibrée</button>
             <button onClick={() => resetFilters()} className="reset">Réinitialiser les filtres</button>
 
-            <h1>search : {search} - sort : {sort}</h1>
+            {props.types ? <select onChange={(event) => setSort(event.target.value)} className="select-type">
+                <option value="pokemon/">Afficher un type</option>
+                {props.types.map((type) => ( 
+                    <option key={type[0]} value={"pokemon/type/" + type}>{type}</option>
+                ))}
+                </select> : null}
+
         </section>
     )
 }
