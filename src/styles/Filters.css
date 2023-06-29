@@ -29,10 +29,6 @@ button:hover, input:not(.search):hover {
     color: #FAFAFA;
 }
 
-.hidden {
-    display: none;
-}
-
 .submit {
     padding: 0px 10px;
     font-size: 20px;

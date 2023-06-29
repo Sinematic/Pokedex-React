@@ -6,6 +6,7 @@ import "../styles/Pokedex.css"
 
 function Pokedex() {
 
+    const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState(null)
     const [pokemons, setPokemons] = useState([])
     const [sort, setSort] = useState("pokemon/")
@@ -13,6 +14,7 @@ function Pokedex() {
     const [retro, displayRetro] = useState(false)
     const [stats, displayStats] = useState(false)
     const [types, setTypes] = useState([])
+    const [pokemonArray, setPokemonArray] = useState([])
 
     const getTypes = async () => {
 
@@ -21,18 +23,17 @@ function Pokedex() {
         setTypes(data.map((data) => data.name))
     }
 
-    const getPokemons = async (bool=true) => {
+    const getPokemons = async () => {
 
         try {
+
+            setLoading(true)
+
             const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
             const data = await response.json();
-/*
-            const evo = [[data[132].apiPreEvolution], data[132].apiEvolutions].flat()
-            const evoherbi = [[data[2].apiPreEvolution], data[2].apiEvolutions].flat()
 
-            console.log(evo)
-            console.log(evoherbi)
-*/
+            setLoading(false)
+
             const flattened = Array.isArray(data) ? data.flat() : [data]
 
             const pokemonList = flattened.map((element) => ({
@@ -54,11 +55,22 @@ function Pokedex() {
                 sprite : element.sprite
             }))
         
-            bool ? setPokemons(pokemonList) : setPokemons([...pokemonList])
 
-        } catch {
-            setPokemons([])
-            setMessage("Aucun Pokémon n'a été trouvé !")
+            if (pokemonArray.length === 0) {
+                setPokemons(pokemonList)
+
+            } else {
+
+                let tree = pokemonList.filter(function(pokemon) {
+                    return pokemonArray.includes(pokemon.number)
+                })
+
+                setPokemons(tree)
+            }
+
+        } catch(error) {
+            
+            setMessage(error)
         }
 
     } 
@@ -67,8 +79,9 @@ function Pokedex() {
         setSort()
         getTypes()
         getPokemons()
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sort])
+    }, [sort, setPokemonArray])
 
     return (
 
@@ -83,10 +96,12 @@ function Pokedex() {
                 search={search}
                 setSearch={setSearch}
                 types={types}
+                pokemonArray={pokemonArray}
+                setPokemonArray={setPokemonArray}
             />
 
             <section className="pokedex">
-                {pokemons.length ? pokemons.map((pokemon) => (
+                {pokemons.length || loading ? pokemons.map((pokemon) => (
                     <Card key={pokemon.number}
                         {...pokemon}
                         sort={sort} 
@@ -94,7 +109,8 @@ function Pokedex() {
                         stats={stats} 
                         displayStats={displayStats}
                         retro={retro}
-                        isVisible={true}
+                        pokemonArray={pokemonArray}
+                        setPokemonArray={setPokemonArray}
                     />
                 )) : <Error message={message} setMessage={setMessage} />}
 

@@ -3,11 +3,19 @@ import "../styles/Card.css"
 
 function Card(props) {
 
+    const {setSort, setPokemonArray, } = props
+    const {preEvolution, evolutions, number} = props
+
+    const generatePokemonArray = () => {
+        const values = [preEvolution.pokedexIdd, number, evolutions.map(evolutions => evolutions.pokedexId)].flat()
+        const array = values.filter(value => value !== undefined)
+        setPokemonArray(array)
+        setSort("pokemon/")
+    }
+
     return (
         <Fragment>
-            {props.isVisible &&  
-            
-            <article/* onClick={() => getEvolutions(props.preEvolution, props.evolutions)} */className="pokemon-card" id={props.number} style={{ order: props.number }}>
+            <article onClick={() => generatePokemonArray()} className={"pokemon-card border-gen-" + props.generation} id={props.number}>
 
                 <img loading="lazy" src={props.retro ? props.sprite : props.image} alt={props.name} className="pokemon-img" />
 
@@ -22,6 +30,8 @@ function Card(props) {
 
                 <p className="pokemon-types">{props.type1[0]}{props.type1[0] !== props.type2[0] ? " - " + props.type2[0] : null}</p>
                 <div className={"generation-badge generation-" + props.generation}>{props.generation}</div>
+                <div className={"opposit opposit-" + props.generation}><div className="negative"></div></div>
+                <div className={"halo halo-" + props.generation}></div>
 
                 {props.stats ? <ol className="pokemon-stats">
                     <li className="pokemon-stat-li">HP : {props.hp}</li>
@@ -32,7 +42,7 @@ function Card(props) {
                     <li className="pokemon-stat-li">Vitesse : {props.speed}</li>
                 </ol> : null}
 
-            </article>}
+            </article>
         </Fragment>
         
         
