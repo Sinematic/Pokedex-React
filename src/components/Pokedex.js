@@ -54,8 +54,6 @@ function Pokedex() {
 
     const getPokemons = async () => {
 
-        sort === undefined ? setSort("pokemon/") : console.log("")
-
         setLoading(true)
 
         if (sort === "pokemon/") {
