@@ -18,70 +18,99 @@ function Pokedex() {
 
     const getTypes = async () => {
 
-        const response = await fetch(`https://pokebuildapi.fr/api/v1/types`)
-        const data = await response.json();
-        setTypes(data.map((data) => data.name))
+        if (localStorage.getItem("types") === null) { 
+
+            const response = await fetch(`https://pokebuildapi.fr/api/v1/types`)
+            const data = await response.json();
+
+            const objTypes = data.map((data) => data.name)
+
+            localStorage.setItem("types", JSON.stringify(objTypes))
+        }
+        
+        setTypes(JSON.parse(localStorage.getItem("types")))
+    }
+
+    const templatePokemon = (pokemonData) => {
+
+        return ({
+            name : pokemonData.name,
+            number : pokemonData.pokedexId,
+            image : pokemonData.image,
+            generation : pokemonData.apiGeneration,
+            hp : pokemonData.stats.HP,
+            attack : pokemonData.stats.attack,
+            defense : pokemonData.stats.defense,
+            specialAttack : pokemonData.stats.special_attack,
+            specialDefense : pokemonData.stats.special_defense,
+            speed : pokemonData.stats.speed,
+            type1 : [pokemonData.apiTypes[0].name, pokemonData.apiTypes[0].image],
+            type2 : [pokemonData.apiTypes[pokemonData.apiTypes.length -1].name, pokemonData.apiTypes[pokemonData.apiTypes.length -1].image],
+            preEvolution : pokemonData.apiPreEvolution,
+            evolutions : [...pokemonData.apiEvolutions],
+            sprite : pokemonData.sprite
+        })
     }
 
     const getPokemons = async () => {
 
-        try {
+        sort === undefined ? setSort("pokemon/") : console.log("")
 
-            setLoading(true)
+        setLoading(true)
 
-            const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
-            const data = await response.json();
+        if (sort === "pokemon/") {
 
-            setLoading(false)
+            if (JSON.parse(localStorage.getItem("pokemons")) === null) { 
 
-            const flattened = Array.isArray(data) ? data.flat() : [data]
-
-            const pokemonList = flattened.map((element) => ({
-                    
-                name : element.name,
-                number : element.pokedexId,
-                image : element.image,
-                generation : element.apiGeneration,
-                hp : element.stats.HP,
-                attack : element.stats.attack,
-                defense : element.stats.defense,
-                specialAttack : element.stats.special_attack,
-                specialDefense : element.stats.special_defense,
-                speed : element.stats.speed,
-                type1 : [element.apiTypes[0].name, element.apiTypes[0].image],
-                type2 : [element.apiTypes[element.apiTypes.length -1].name, element.apiTypes[element.apiTypes.length -1].image],
-                preEvolution : element.apiPreEvolution,
-                evolutions : [...element.apiEvolutions],
-                sprite : element.sprite
-            }))
+                const response = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/`)
+                const data = await response.json()
         
+                setLoading(false)
+
+                const flattened = Array.isArray(data) ? data.flat() : [data]
+                const pokemonList = flattened.map((element) => (templatePokemon(element)))
+                
+                localStorage.setItem("pokemons", JSON.stringify(pokemonList))
+                
+            } else setLoading(false)
 
             if (pokemonArray.length === 0) {
-                setPokemons(pokemonList)
-
+                setPokemons(JSON.parse(localStorage.getItem("pokemons")))
+                
             } else {
-
-                let tree = pokemonList.filter(function(pokemon) {
+                let tree = JSON.parse(localStorage.getItem("pokemons")).filter(function(pokemon) {
                     return pokemonArray.includes(pokemon.number)
                 })
 
                 setPokemons(tree)
             }
 
-        } catch(error) {
-            
-            setMessage(error)
+        } else {
+
+            try {
+                const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
+                const data = await response.json()
+
+                setLoading(false)
+    
+                const flattened = Array.isArray(data) ? data.flat() : [data]
+                const pokemonList = flattened.map((element) => (templatePokemon(element)))
+    
+                setPokemons(pokemonList)
+
+            } catch {
+                setMessage(`Le pokémon "${sort}" n'a pas été trouvé !`)
+            }
         }
 
-    } 
+    }
 
     useEffect(() => {
         setSort()
         getTypes()
         getPokemons()
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sort, setPokemonArray])
+    }, [sort, setPokemonArray, message])
 
     return (
 
@@ -99,9 +128,10 @@ function Pokedex() {
                 pokemonArray={pokemonArray}
                 setPokemonArray={setPokemonArray}
             />
-
+            
             <section className="pokedex">
-                {pokemons.length || loading ? pokemons.map((pokemon) => (
+                {"Loading vaut" + loading}
+                {message === null ? pokemons.map((pokemon) => (
                     <Card key={pokemon.number}
                         {...pokemon}
                         sort={sort} 

@@ -47,7 +47,7 @@ function Filters(props) {
         displayRetro(false)
         setPokemonArray([])
         setSort(event.target.value)
-    } 
+    }
 
     return (
         <section className="filters">
