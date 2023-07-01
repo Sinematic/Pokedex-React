@@ -85,22 +85,16 @@ function Pokedex() {
 
         } else {
 
-            try {
-                const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
-                const data = await response.json()
+            const response = await fetch(`https://pokebuildapi.fr/api/v1/${sort}`)
+            const data = await response.json()
 
-                setLoading(false)
+            setLoading(false)
     
-                const flattened = Array.isArray(data) ? data.flat() : [data]
-                const pokemonList = flattened.map((element) => (templatePokemon(element)))
+            const flattened = Array.isArray(data) ? data.flat() : [data]
+            const pokemonList = flattened.map((element) => (templatePokemon(element)))
     
-                setPokemons(pokemonList)
-
-            } catch {
-                setMessage(`Le pokémon "${sort}" n'a pas été trouvé !`)
-            }
+            setPokemons(pokemonList)
         }
-
     }
 
     useEffect(() => {
@@ -108,7 +102,7 @@ function Pokedex() {
         getTypes()
         getPokemons()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sort, setPokemonArray, message])
+    }, [sort, setPokemonArray])
 
     return (
 
@@ -128,8 +122,8 @@ function Pokedex() {
             />
             
             <section className="pokedex">
-                {"Loading vaut" + loading}
-                {message === null ? pokemons.map((pokemon) => (
+
+                {pokemons ? pokemons.map((pokemon) => (
                     <Card key={pokemon.number}
                         {...pokemon}
                         sort={sort} 
