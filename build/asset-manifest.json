@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "./static/css/main.3e7fcf67.css",
+    "main.js": "./static/js/main.00500f4b.js",
+    "static/media/Pokemon Hollow.ttf": "./static/media/Pokemon Hollow.47f77ce9939c5330492b.ttf",
+    "static/media/Pokemon Solid.ttf": "./static/media/Pokemon Solid.5d60be1f7ff5fcc21fc1.ttf",
+    "static/media/logo.svg": "./static/media/logo.d64c0a3fff34531c6ca50283de34ee02.svg",
+    "static/media/github.png": "./static/media/github.fc497857196dc743cd9d.png",
+    "static/media/favicon.ico": "./static/media/favicon.e369af7e4fae4aff1580.ico",
+    "index.html": "./index.html",
+    "static/media/twitter-icon.svg": "./static/media/twitter-icon.db4f5b0c8ddbce4c50222df862bbcd1f.svg",
+    "main.3e7fcf67.css.map": "./static/css/main.3e7fcf67.css.map",
+    "main.00500f4b.js.map": "./static/js/main.00500f4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e7fcf67.css",
+    "static/js/main.00500f4b.js"
+  ]
+}
